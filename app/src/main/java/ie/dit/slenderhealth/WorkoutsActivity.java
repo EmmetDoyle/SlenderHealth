@@ -1,15 +1,14 @@
 package ie.dit.slenderhealth;
 
-import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
+
+import ie.dit.slenderhealth.models.Workout;
 
 public class WorkoutsActivity extends ListActivity {
     ArrayList<Workout> workouts = new ArrayList<>();
