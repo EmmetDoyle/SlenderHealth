@@ -4,7 +4,6 @@ package ie.dit.slenderhealth.models;
  * Created by c11428058 on 25/11/2016.
  */
 public class Exercise {
-    private String name;
     private int weight;
     private int reps;
     private int sets;
@@ -12,27 +11,19 @@ public class Exercise {
 
 
     //used when user creates workout
-    public Exercise(String name, int weight, int reps, int sets) {
-        this.name = name;
+    public Exercise(int weight, int reps, int sets) {
         this.weight = weight;
         this.reps = reps;
         this.sets = sets;
     }
 
     //used when getting workout from dB
-    public Exercise(String name, int weight, int reps, int sets, long _id) {
-        this(name, weight, reps, sets);
+    public Exercise(int weight, int reps, int sets, long _id) {
+        this(weight, reps, sets);
         this._id = _id;
 
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public int getWeight() {
         return weight;
