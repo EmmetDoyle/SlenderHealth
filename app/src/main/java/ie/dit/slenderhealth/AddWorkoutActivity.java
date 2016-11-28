@@ -12,8 +12,11 @@ import ie.dit.slenderhealth.models.MachineDao;
 
 public class AddWorkoutActivity extends Activity {
 
+    //private workoutDao;
+    //private exerciseDao;
     private MachineDao machineDao;
     Machine[] machines;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,9 @@ public class AddWorkoutActivity extends Activity {
                 weights.setAdapter(weightsAdapter);
             }
         });
+
+        // TODO: 28/11/2016 when Add clicked, get values of all views on screen and add them to exercise array
+        // TODO: 28/11/2016 when Finish clicked, add all exercises to workout
     }
 
 
