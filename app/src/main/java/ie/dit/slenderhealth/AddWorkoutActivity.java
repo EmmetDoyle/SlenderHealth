@@ -15,7 +15,6 @@ public class AddWorkoutActivity extends Activity {
     //private workoutDao;
     //private exerciseDao;
     private MachineDao machineDao;
-    Machine[] machines;
 
 
     @Override
@@ -23,7 +22,11 @@ public class AddWorkoutActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_workout);
 
-        // Machine[] machines = machineDao.getAllMachines();
+        machineDao = new MachineDao(this);
+
+        final Machine[] machines = machineDao.getAllMachines();
+
+
 
         Spinner machine = (Spinner)findViewById(R.id.machine);
         ArrayAdapter<Machine> machineAdapter = new ArrayAdapter<Machine>(this, android.R.layout.simple_spinner_item, machines);

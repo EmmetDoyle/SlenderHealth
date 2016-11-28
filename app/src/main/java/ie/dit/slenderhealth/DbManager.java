@@ -37,27 +37,27 @@ public class DbManager {
 
     private static final String CREATE_MACHINE_TABLE =
             "create table " + TABLE_MACHINE + " (" +
-                    KEY_ROWID + "integer primary key autoincrement, " +
-                    KEY_EQUIP_NAME + "text not null, " +
-                    KEY_MINWEIGHT + "integer not null, " +
-                    KEY_MAXWEIGHT + "integer not null, " +
-                    KEY_STEP + "integer not null);";
+                    KEY_ROWID + " integer primary key autoincrement, " +
+                    KEY_EQUIP_NAME + " text not null, " +
+                    KEY_MINWEIGHT + " integer not null, " +
+                    KEY_MAXWEIGHT + " integer not null, " +
+                    KEY_STEP + " integer not null);";
 
     private static final String CREATE_WORKOUT_TABLE =
             "create table " + TABLE_WORKOUT + " (" +
-                    KEY_ROWID + "integer primary key autoincrement, " +
-                    KEY_W_NAME + "text not null);";
+                    KEY_ROWID + " integer primary key autoincrement, " +
+                    KEY_W_NAME + " text not null);";
 
     private static final String CREATE_EXERCISE_TABLE =
             "create table " + TABLE_EXERCISE + " (" +
-                    KEY_ROWID + "integer primary key autoincrement, " +
-                    KEY_MACHINE + "integer not null, " +
-                    KEY_WORKOUT + "integer not null, " +
-                    KEY_WEIGHT + "integer not null, " +
-                    KEY_REPS + "integer not null, " +
-                    KEY_SETS + "integer not null, " +
+                    KEY_ROWID + " integer primary key autoincrement, " +
+                    KEY_MACHINE + " integer not null, " +
+                    KEY_WORKOUT + " integer not null, " +
+                    KEY_WEIGHT + " integer not null, " +
+                    KEY_REPS + " integer not null, " +
+                    KEY_SETS + " integer not null, " +
                     "FOREIGN KEY(" + KEY_MACHINE + ") REFERENCES " + TABLE_MACHINE + "(" + KEY_ROWID + "), " +
-                    "FOREIGN KEY(" + KEY_WORKOUT + ") REFERENCES " + TABLE_WORKOUT + "(" + KEY_ROWID + ");";
+                    "FOREIGN KEY(" + KEY_WORKOUT + ") REFERENCES " + TABLE_WORKOUT + "(" + KEY_ROWID + "));";
 
 
     private final Context context;
@@ -82,7 +82,23 @@ public class DbManager {
             db.execSQL(CREATE_WORKOUT_TABLE);
             db.execSQL(CREATE_MACHINE_TABLE);
             db.execSQL(CREATE_EXERCISE_TABLE);
-            manager.insertInitialMachines();
+
+            Machine[] machines = {
+                    new Machine("Shoulder Press", 20, 200, 20),
+                    new Machine("Leg Curler", 10, 150, 10),
+                    new Machine("Bicep Curler", 20, 140, 5),
+                    new Machine("Squat Machine", 40, 300, 20)
+            };
+
+            for(int i = 0; i < machines.length; i++) {
+
+                ContentValues initialValues = new ContentValues();
+                initialValues.put(KEY_EQUIP_NAME, machines[i].getName());
+                initialValues.put(KEY_MINWEIGHT, machines[i].getMinWeight());
+                initialValues.put(KEY_MAXWEIGHT, machines[i].getMaxWeight());
+                initialValues.put(KEY_STEP, machines[i].getStep());
+                db.insert(TABLE_MACHINE, null, initialValues);
+            }
         }
 
         @Override
@@ -101,27 +117,8 @@ public class DbManager {
         DBHelper.close();
     }
 
-    private void insertInitialMachines(){
-        Machine[] machines = {
-                new Machine("Shoulder Press", 20, 200, 20),
-                new Machine("Leg Curler", 10, 150, 10),
-                new Machine("Bicep Curler", 20, 140, 5),
-                new Machine("Squat Machine", 40, 300, 20)
-        };
-
-        for(int i = 0; i < machines.length; i++) {
-
-            ContentValues initialValues = new ContentValues();
-            initialValues.put(KEY_EQUIP_NAME, machines[i].getName());
-            initialValues.put(KEY_MINWEIGHT, machines[i].getMinWeight());
-            initialValues.put(KEY_MAXWEIGHT, machines[i].getMaxWeight());
-            initialValues.put(KEY_STEP, machines[i].getStep());
-            db.insert(TABLE_MACHINE, null, initialValues);
-        }
-    }
-
     public Cursor getAllMachines(){
-        return db.query(TABLE_MACHINE, new String[] {
+        Cursor cursor = db.query(TABLE_MACHINE, new String[] {
                     KEY_ROWID,
                     KEY_EQUIP_NAME,
                     KEY_MINWEIGHT,
@@ -133,6 +130,8 @@ public class DbManager {
                 null,
                 null
         );
+
+        return cursor;
     }
 
 
