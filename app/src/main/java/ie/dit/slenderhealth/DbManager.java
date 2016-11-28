@@ -14,6 +14,8 @@ import android.util.Log;
 public class DbManager {
 
     public static final String KEY_ROWID            = "_id";
+    public static final String KEY_MACHINE          = "machine";
+    public static final String KEY_WORKOUT          = "workout";
     public static final String KEY_W_NAME           = "w_name";
     public static final String KEY_EQUIP_NAME       = "equip_name";
     public static final String KEY_WEIGHT           = "weight";
@@ -40,22 +42,29 @@ public class DbManager {
     private static final String CREATE_WORKOUT_TABLE =
             "create table " + TABLE_WORKOUT + " (" +
                     KEY_ROWID + "integer primary key autoincrement, " +
-                    KEY_EQUIP_NAME + "text not null foreign key, " +
                     KEY_W_NAME + "text not null);";
 
     private static final String CREATE_EXERCISE_TABLE =
             "create table " + TABLE_EXERCISE + " (" +
                     KEY_ROWID + "integer primary key autoincrement, " +
-                    KEY_EQUIP_NAME + "text not null foreign key, " +
+                    KEY_MACHINE + "integer not null, " +
+                    KEY_WORKOUT + "integer not null, " +
                     KEY_WEIGHT + "integer not null, " +
                     KEY_REPS + "integer not null, " +
-                    KEY_SETS + "integer not null);";
+                    KEY_SETS + "integer not null, " +
+                    "FOREIGN KEY(" + KEY_MACHINE + ") REFERENCES " + TABLE_MACHINE + "(" + KEY_ROWID + "), " +
+                    "FOREIGN KEY(" + KEY_WORKOUT + ") REFERENCES " + TABLE_WORKOUT + "(" + KEY_ROWID + ");";
 
 
-    //private final Context context;
+    private final Context context;
 
     private DatabaseHelper DBHelper;
     private SQLiteDatabase db;
+
+    public DbManager(Context ctx){
+        this.context = ctx;
+        DBHelper = new DatabaseHelper(context);
+    }
 
     private static class DatabaseHelper extends SQLiteOpenHelper {
         DatabaseHelper(Context context){
