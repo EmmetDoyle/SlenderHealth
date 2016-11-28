@@ -58,6 +58,7 @@
        <TextView
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
+           android:text="1"
            android:id="@+id/reps" />
 
     </LinearLayout>
@@ -81,8 +82,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:id="@+id/seekBar"
-            android:layout_centerHorizontal="true" />
+            android:id="@+id/repsSeekBar"
+            android:max="19"/>
 
         <TextView
             android:id="@+id/stopRep"
@@ -108,6 +109,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="1"
             android:id="@+id/sets" />
 
     </LinearLayout>
@@ -131,8 +133,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:id="@+id/seekBar2"
-            android:layout_centerHorizontal="true" />
+            android:id="@+id/setsSeekBar"
+            android:max="4" />
 
         <TextView
             android:id="@+id/stopSet"

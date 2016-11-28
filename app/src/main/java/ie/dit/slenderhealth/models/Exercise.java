@@ -8,6 +8,7 @@ public class Exercise {
     private int reps;
     private int sets;
     private long _id;
+    private Machine machine;
 
 
     //used when user creates workout
@@ -21,6 +22,10 @@ public class Exercise {
     public Exercise(int weight, int reps, int sets, long _id) {
         this(weight, reps, sets);
         this._id = _id;
+
+    }
+
+    public Exercise(){
 
     }
 
@@ -57,5 +62,11 @@ public class Exercise {
         this._id = _id;
     }
 
+    public void setMachine(Machine machine) {
+        this.machine = machine;
+    }
 
+    public Machine getMachine() {
+        return machine;
+    }
 }
