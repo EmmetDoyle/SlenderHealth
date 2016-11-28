@@ -24,6 +24,14 @@
             android:name=".AddWorkoutActivity"
             android:label="@string/title_activity_add_workout" >
         </activity>
+        <activity
+            android:name=".ProgressActivity"
+            android:label="@string/title_activity_progress" >
+        </activity>
+        <activity
+            android:name=".AddAssessmentActivity"
+            android:label="@string/title_activity_add_assessment" >
+        </activity>
     </application>
 
 </manifest>

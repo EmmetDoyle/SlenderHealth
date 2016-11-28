@@ -26,7 +26,8 @@ public class MainActivity extends Activity {
         findViewById(R.id.progress).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainActivity.this, ProgressActivity.class);
+                startActivity(intent);
             }
         });
 
