@@ -8,6 +8,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.ArrayList;
+
+import ie.dit.slenderhealth.models.Machine;
+
 /**
  * Created by c11428058 on 25/11/2016.
  */
@@ -63,12 +67,14 @@ public class DbManager {
 
     public DbManager(Context ctx){
         this.context = ctx;
-        DBHelper = new DatabaseHelper(context);
+        DBHelper = new DatabaseHelper(context, this);
     }
 
     private static class DatabaseHelper extends SQLiteOpenHelper {
-        DatabaseHelper(Context context){
+        DbManager manager;
+        DatabaseHelper(Context context, DbManager manager){
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
+            this.manager = manager;
         }
 
         @Override
@@ -76,6 +82,7 @@ public class DbManager {
             db.execSQL(CREATE_WORKOUT_TABLE);
             db.execSQL(CREATE_MACHINE_TABLE);
             db.execSQL(CREATE_EXERCISE_TABLE);
+            manager.insertInitialMachines();
         }
 
         @Override
@@ -93,5 +100,24 @@ public class DbManager {
     public void close() {
         DBHelper.close();
     }
+
+    private void insertInitialMachines(){
+        Machine[] machines = {
+                new Machine("Shoulder Press", 20, 200, 20),
+                new Machine("Leg Curler", 10, 150, 10),
+                new Machine("Bicep Curler", 20, 140, 5),
+                new Machine("Squat Machine", 40, 300, 20)
+        };
+
+        for(int i = 0; i < machines.length; i++) {
+
+            ContentValues initialValues = new ContentValues();
+            initialValues.put(KEY_EQUIP_NAME, machines[i].getName());
+            initialValues.put(KEY_MINWEIGHT, machines[i].getMinWeight());
+            initialValues.put(KEY_MAXWEIGHT, machines[i].getMaxWeight());
+            initialValues.put(KEY_STEP, machines[i].getStep());
+            db.insert(TABLE_MACHINE, null, initialValues);
+        }
+    };
 
 }
