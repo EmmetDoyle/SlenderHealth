@@ -118,6 +118,21 @@ public class DbManager {
             initialValues.put(KEY_STEP, machines[i].getStep());
             db.insert(TABLE_MACHINE, null, initialValues);
         }
-    };
+    }
+
+    public Cursor getAllMachines(){
+        return db.query(TABLE_MACHINE, new String[] {
+                    KEY_ROWID,
+                    KEY_EQUIP_NAME,
+                    KEY_MINWEIGHT,
+                    KEY_MAXWEIGHT,
+                    KEY_STEP},
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+    }
 
 }

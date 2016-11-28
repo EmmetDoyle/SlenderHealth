@@ -8,15 +8,19 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import ie.dit.slenderhealth.models.Machine;
+import ie.dit.slenderhealth.models.MachineDao;
 
 public class AddWorkoutActivity extends Activity {
+
+    private MachineDao machineDao;
+    Machine[] machines;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_workout);
 
-        final Machine[] machines = {new Machine("Leg Curler", 10, 150, 10), new Machine("Shoulder Press", 20, 200, 20)};
+        // Machine[] machines = machineDao.getAllMachines();
 
         Spinner machine = (Spinner)findViewById(R.id.machine);
         ArrayAdapter<Machine> machineAdapter = new ArrayAdapter<Machine>(this, android.R.layout.simple_spinner_item, machines);
