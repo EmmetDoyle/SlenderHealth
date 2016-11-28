@@ -10,12 +10,14 @@ public class Machine {
     private int maxWeight;
     private int step;
     private Integer[] weights;
+    private int id;
 
-    public Machine(String name, int minWeight, int maxWeight, int step) {
+    public Machine(String name, int minWeight, int maxWeight, int step, int id) {
         this.name = name;
         this.minWeight = minWeight;
         this.maxWeight = maxWeight;
         this.step = step;
+        this.id = id;
         weights = calculateWeights();
     }
 
@@ -37,6 +39,10 @@ public class Machine {
 
     public int getStep() {
         return step;
+    }
+
+    public int getId() {
+        return id;
     }
 
     private Integer[] calculateWeights(){

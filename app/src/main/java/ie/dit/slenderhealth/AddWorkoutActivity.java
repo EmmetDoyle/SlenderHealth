@@ -15,10 +15,11 @@ import ie.dit.slenderhealth.models.Exercise;
 import ie.dit.slenderhealth.models.Machine;
 import ie.dit.slenderhealth.models.MachineDao;
 import ie.dit.slenderhealth.models.Workout;
+import ie.dit.slenderhealth.models.WorkoutDao;
 
 public class AddWorkoutActivity extends Activity implements View.OnClickListener{
 
-    private workoutDao;
+    private WorkoutDao workoutDao;
     //private exerciseDao;
     private MachineDao machineDao;
     private Workout workout;
@@ -30,6 +31,7 @@ public class AddWorkoutActivity extends Activity implements View.OnClickListener
         setContentView(R.layout.activity_add_workout);
 
         machineDao = new MachineDao(this);
+        workoutDao = new WorkoutDao(this);
         workout = new Workout();
         currentExercise = new Exercise();
 
@@ -111,6 +113,7 @@ public class AddWorkoutActivity extends Activity implements View.OnClickListener
         // TODO: 28/11/2016 when Add clicked, get values of all views on screen and add them to exercise array
         findViewById(R.id.addExercise).setOnClickListener(this);
         // TODO: 28/11/2016 when Finish clicked, add all exercises to workout
+        findViewById(R.id.submit).setOnClickListener(this);
     }
 
     @Override
@@ -118,6 +121,11 @@ public class AddWorkoutActivity extends Activity implements View.OnClickListener
         switch (v.getId()){
             case R.id.addExercise:
                 addExerciseToWorkout();
+                break;
+
+            case R.id.submit:
+                workoutDao.insertWorkout(workout);
+                break;
         }
     }
 

@@ -35,4 +35,8 @@ public class Workout {
     public void addExercise(Exercise exercise){
         exercises.add(exercise);
     }
+
+    public ArrayList<Exercise> getExercises() {
+        return exercises;
+    }
 }

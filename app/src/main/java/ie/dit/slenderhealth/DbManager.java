@@ -10,6 +10,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+import ie.dit.slenderhealth.models.Exercise;
 import ie.dit.slenderhealth.models.Machine;
 
 /**
@@ -84,10 +85,10 @@ public class DbManager {
             db.execSQL(CREATE_EXERCISE_TABLE);
 
             Machine[] machines = {
-                    new Machine("Shoulder Press", 20, 200, 20),
-                    new Machine("Leg Curler", 10, 150, 10),
-                    new Machine("Bicep Curler", 20, 140, 5),
-                    new Machine("Squat Machine", 40, 300, 20)
+                    new Machine("Shoulder Press", 20, 200, 20, 0),
+                    new Machine("Leg Curler", 10, 150, 10, 0),
+                    new Machine("Bicep Curler", 20, 140, 5, 0),
+                    new Machine("Squat Machine", 40, 300, 20, 0)
             };
 
             for(int i = 0; i < machines.length; i++) {
@@ -134,6 +135,20 @@ public class DbManager {
         return cursor;
     }
 
+    public long insertWorkout(String name){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(KEY_W_NAME, name);
+        return db.insert(TABLE_WORKOUT, null, contentValues);
+    }
 
 
+    public long insertExercise(int weight, int reps, int sets, int machine, int workout){
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(KEY_WEIGHT, weight);
+        contentValues.put(KEY_REPS, reps);
+        contentValues.put(KEY_SETS, sets);
+        contentValues.put(KEY_MACHINE, machine);
+        contentValues.put(KEY_WORKOUT, workout);
+        return db.insert(TABLE_EXERCISE, null, contentValues);
+    }
 }

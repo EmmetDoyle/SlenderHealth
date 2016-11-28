@@ -34,8 +34,9 @@ public class MachineDao {
             int minWeight = cursor.getInt(cursor.getColumnIndex(DbManager.KEY_MINWEIGHT));
             int maxWeight = cursor.getInt(cursor.getColumnIndex(DbManager.KEY_MAXWEIGHT));
             int step = cursor.getInt(cursor.getColumnIndex(DbManager.KEY_STEP));
+            int id = cursor.getInt(0);
 
-            machines[i++] = new Machine(name, minWeight, maxWeight, step);
+            machines[i++] = new Machine(name, minWeight, maxWeight, step, id);
             cursor.moveToNext();
         }
 
