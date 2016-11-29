@@ -1,10 +1,18 @@
 package ie.dit.slenderhealth;
 
+/*
+* Created by Emmet Doyle
+*AddWorkoutActivity
+* Activity for adding workouts to db
+* Adds exercises to Exercise array until
+ */
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -110,9 +118,7 @@ public class AddWorkoutActivity extends Activity implements View.OnClickListener
             }
         });
 
-        // TODO: 28/11/2016 when Add clicked, get values of all views on screen and add them to exercise array
         findViewById(R.id.addExercise).setOnClickListener(this);
-        // TODO: 28/11/2016 when Finish clicked, add all exercises to workout
         findViewById(R.id.submit).setOnClickListener(this);
     }
 
@@ -124,6 +130,8 @@ public class AddWorkoutActivity extends Activity implements View.OnClickListener
                 break;
 
             case R.id.submit:
+                EditText workoutName = (EditText) findViewById(R.id.workoutName);
+                workout.setName(workoutName.getText().toString());
                 workoutDao.insertWorkout(workout);
                 break;
         }

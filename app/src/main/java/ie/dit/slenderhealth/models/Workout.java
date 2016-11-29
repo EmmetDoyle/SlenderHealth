@@ -1,9 +1,12 @@
 package ie.dit.slenderhealth.models;
 
+
 import java.util.ArrayList;
 
 /**
- * Created by c11428058 on 24/11/2016.
+ * Created by Emmet Doyle on 24/11/2016.
+ * Workout Class
+ * Stores attributes and methods on workouts
  */
 public class Workout {
 
