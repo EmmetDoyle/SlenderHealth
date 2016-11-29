@@ -18,6 +18,11 @@ public class Workout {
 
     }
 
+    public Workout(String name, long id) {
+        this.name = name;
+        this.id = id;
+    }
+
     public Workout(String name){
         this.name = name;
     }

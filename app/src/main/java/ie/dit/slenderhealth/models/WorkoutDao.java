@@ -1,6 +1,9 @@
 package ie.dit.slenderhealth.models;
 
 import android.content.Context;
+import android.database.Cursor;
+
+import java.util.ArrayList;
 
 import ie.dit.slenderhealth.DbManager;
 
@@ -30,5 +33,29 @@ public class WorkoutDao {
         }
         manager.close();
         return id;
+    }
+
+    public ArrayList<Workout> getAllWorkouts(){
+        manager.open();
+
+        Cursor cursor = manager.getAllWorkouts();
+        //   loop over the returned cursor
+        //   At each loop create a Machine object from the cursor data
+        ArrayList<Workout> workouts = new ArrayList<>();
+
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            String name = cursor.getString(cursor.getColumnIndex(DbManager.KEY_W_NAME));
+            int id = cursor.getInt(0);
+
+            workouts.add(new Workout(name, id));
+            cursor.moveToNext();
+        }
+
+        manager.close();
+
+        //   Add Machine object to array/list
+        //   return array/list
+        return workouts;
     }
 }

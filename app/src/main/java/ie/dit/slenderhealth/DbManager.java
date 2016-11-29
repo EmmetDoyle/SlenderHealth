@@ -135,6 +135,20 @@ public class DbManager {
         return cursor;
     }
 
+    public Cursor getAllWorkouts(){
+        Cursor cursor = db.query(TABLE_WORKOUT, new String[] {
+                        KEY_ROWID,
+                        KEY_W_NAME},
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+
+        return cursor;
+    }
+
     public long insertWorkout(String name){
         ContentValues contentValues = new ContentValues();
         contentValues.put(KEY_W_NAME, name);

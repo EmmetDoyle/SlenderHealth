@@ -9,17 +9,18 @@ import android.widget.ArrayAdapter;
 import java.util.ArrayList;
 
 import ie.dit.slenderhealth.models.Workout;
+import ie.dit.slenderhealth.models.WorkoutDao;
 
 public class WorkoutsActivity extends ListActivity {
     ArrayList<Workout> workouts = new ArrayList<>();
 
+    private WorkoutDao workoutDao;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        workouts.add(new Workout("Abs Attack!!"));
-        workouts.add(new Workout("leg!!"));
-        workouts.add(new Workout("arms Attack!!"));
-        workouts.add(new Workout("Heart Attack!!"));
 
+        workoutDao = new WorkoutDao(this);
+        workouts = workoutDao.getAllWorkouts();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workouts);
